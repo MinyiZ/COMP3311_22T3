@@ -1,0 +1,55 @@
+Me:           Min
+Email:        minyi.zhong@unsw.edu.au
+Course Email: cs3311@cse.unsw.edu.au
+
+
+Course Content
+-------
+Pre-recorded lectures
+Live lectures (problem-solving sessions)
+Tutorials
+    - mix between tute questions and prac
+        - tute: 1hr
+        - prac: 30min
+        - will adjust as required
+    - what we do
+        - https://github.com/MinyiZ/COMP3311_22T3
+Tute Exercises
+    - a lot lot lot of them
+    - answers will be released
+Prac Exercises
+    - not compulsory but very helpful
+    - answers will be released
+
+Other Knowledge
+----------------
+Regular Expressions (regex)
+    - will be taught as we go along
+    - any quick regex Youtube tutorial should be enough
+Python
+    - nothing crazy complicated
+    - functions
+    - string manipulations
+
+
+Assessments
+---------------
+Quizzes
+Assignment 1
+Assignment 2
+Exam
+
+
+Need help?
+-----------
+Forum (WebCMS3)
+Me
+jas
+
+Today
+-----
+Q5          - identifying data, relationships and constraints
+Q6          - interpreting an ER diagram
+Q7          - simple ER diagram
+Q10,11,15   - more ER diagram practice
+prac        - installing Postgres

@@ -1,0 +1,26 @@
+student enrols in a lab class
+--------------------------------
+Data Items
+----------
+student(id, name, addres,....)
+class(classid, time,...)
+tutor(id, name, addres,...)
+course(courseid, term,....)
+room(location, ...)
+
+Relationships
+--------------
+student enrols in class
+student enrols in course
+tutor teaches class
+class in room
+course has classes
+
+Constraints
+-----------
+class has to be held in a room
+student has to fulfil preqs to enrol in a course
+student can only enrol in one lab class
+class must have tutor
+room can't be double booked
+student cannot enrol in full class/course

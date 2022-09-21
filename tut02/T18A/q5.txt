@@ -1,0 +1,25 @@
+student enrols in a lab class
+--------------------------------
+Data Items
+----------
+student(name, id,...)
+tutor(name, id, ...)
+class(location,...)
+course(course id, ...)
+room(address, ...)
+
+Relationships
+--------------
+tutor tutors classs
+class is in room
+student takes class
+course offers class
+student takes course
+
+Constraints
+-----------
+class must be in room
+class cant clash with lectures
+id must be zid for student
+student cannot enrol in full course
+student can't be a tutor for the class
