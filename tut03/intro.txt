@@ -5,8 +5,6 @@ COMP3311 W3 Tutorial
 Notices
 -------
 
-- TUTORIAL IS ONLINE NEXT WEEK
-    - feel free to go to another in-person tute, just let the tutor know
 - Assignment 1 released
     - keep up with any spec updates
 - set up your Postgres Server on CSE servers ASAP

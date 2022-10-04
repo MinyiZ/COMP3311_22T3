@@ -1,0 +1,27 @@
+
+COMP3311 W4 Tutorial
+===========================================================
+
+Notices
+-------
+
+- Quiz 3 due this Friday
+- Ass1 due next Friday 9pm
+
+Assignment 1 Tips
+------------------
+
+- use helper views to simplify queries
+- DROP VIEW usually helps with any create view errors
+- don't use LIMIT 1
+- make sure ass1.sql loads without errors
+- style is consistent
+
+Today
+------
+SQL tidbits (coalesce, matching substring)
+SQL update statements
+SQL constraints
+SQL delete semantics
+SQL queries
+PLpgSQL example
