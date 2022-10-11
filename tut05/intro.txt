@@ -1,0 +1,24 @@
+COMP3311 W5 Tutorial
+===========================================================
+
+Notices
+-------
+
+- Ass1 due Friday 9pm
+
+Assignment 1
+------------------
+
+- check your submission on d2.cse
+    - ass1.sql must load with no errors on a fresh db
+- DO NOT submit on d2.cse
+    - run give on the regular cse server
+- make sure style is consistent
+- DO NOT assume that beer/brewery names are unique
+    - always use id
+
+Today
+------
+
+- how to submit ass1
+- PLpgSQL functions
