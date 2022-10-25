@@ -1,0 +1,30 @@
+
+CREATE AGGREGATE AggName(BaseType) (
+	-- type of intermediate states
+    stype     = StateType,
+    initcond  = StateType
+    sfunc     = (StateType, Value) -> Statetype
+    finalfunc = StateType -> FinalStateType
+);
+
+
+example: sum()
+
+stype = int
+initcond = 0
+sfunc = add function
+finalfunc = nothing
+
+               1    2    3    4
+[1,2,3,4] -> 0 -> 1 -> 3 -> 6 -> 10
+
+
+example: avg()
+
+         sum  num
+stype = (int, int)
+intcond = (0, 0)
+sfunc = add to the sum, increment num
+finalfunct = sum / num
+                    1         2         3         4          finalfunc
+[1,2,3,4] -> (0, 0) -> (1, 1) -> (3, 2) -> (6, 3) -> (10, 4) -> 10/4

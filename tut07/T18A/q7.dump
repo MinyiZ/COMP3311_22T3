@@ -1,0 +1,17 @@
+create table S (
+    x int,
+    y int,
+
+    primary key (x)
+);
+
+insert into S values (1,0);
+insert into S values (2,0);
+insert into S values (3,0);
+insert into S values (4,0);
+insert into S values (5,0);
+insert into S values (6,0);
+insert into S values (7,0);
+insert into S values (8,0);
+insert into S values (9,0);
+

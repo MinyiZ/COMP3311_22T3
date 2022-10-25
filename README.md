@@ -8,3 +8,4 @@
 | Week 3 | https://youtu.be/kSSVd0iV_lw |
 | Week 4 | https://youtu.be/Ck2LgdanAgM |
 | Week 5 | https://youtu.be/eZGaHv6o8CI |
+| Week 7 | https://youtu.be/Xa_bnk3biV8 |

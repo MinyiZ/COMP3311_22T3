@@ -1,0 +1,6 @@
+create table Emp (
+    empname text,
+    salary int,
+    last_date timestamp,
+    last_usr text
+);

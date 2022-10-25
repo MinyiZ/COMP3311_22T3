@@ -1,0 +1,21 @@
+
+COMP3311 W7 Tutorial
+===========================================================
+
+Notices
+-------
+
+- Quiz due Friday 9pm
+
+Assignment 1
+--------------
+
+- auto-marking done except a few late submissions
+- hand-marking mostly done
+
+Today
+------
+
+- assertions
+- triggers
+- aggregates
