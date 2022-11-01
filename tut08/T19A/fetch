@@ -1,0 +1,35 @@
+#!/usr/bin/python3
+
+import sys
+import psycopg2
+
+if len(sys.argv) < 2:
+    print("Usage: opendb DBname")
+    exit(1)
+db = sys.argv[1]
+
+conn = None
+try:
+    conn = psycopg2.connect(f"dbname={db}")
+    cur = conn.cursor()
+
+    cur.execute("select * from s")
+    print("select * from s")
+
+    num = cur.fetchone()
+    print("fetchone()")
+    print(num)
+
+    nums = cur.fetchmany(3)
+    print("fetchmany(3)")
+    print(nums)
+
+    nums = cur.fetchall()
+    print("fetchall()")
+    print(nums)
+except psycopg2.Error as err:
+    print("database error: ", err)
+finally:
+    if conn is not None:
+        conn.close()
+    print("finished with the database")

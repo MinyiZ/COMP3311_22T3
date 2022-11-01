@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+import sys
+import psycopg2
+
+if len(sys.argv) < 3:
+    print(f"Usage {sys.argv[0]} zid term")
+    exit(1)
+
+zid = sys.argv[1]
+term = sys.argv[2]
+
+conn = None
+try:
+    conn = psycopg2.connect("dbname=mymyunsw")
+    cur = conn.cursor()
+
+    query = "select subjects from enrolments_q5 where zid = %s and term = %s"
+    cur.execute(query, [zid, term])
+
+    subjects, = cur.fetchone()
+    print(subjects)
+
+
+except psycopg2.Error as err:
+    print("database error: ", err)
+finally:
+    if conn:
+        conn.close()

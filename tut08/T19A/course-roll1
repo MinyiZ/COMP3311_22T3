@@ -1,0 +1,42 @@
+#!/usr/bin/python3
+import sys
+import psycopg2
+import helpers
+
+if len(sys.argv) < 3:
+    print("Usage: course-roll subject term")
+    exit(1)
+subject = sys.argv[1]
+term = sys.argv[2]
+
+conn = None
+try:
+    conn = psycopg2.connect(f"dbname=mymyunsw")
+    cur = conn.cursor()
+
+    if not helpers.subjectExists(conn, subject):
+        exit(f"Invalid subject {subject}")
+
+    if not helpers.termExists(conn, term):
+        exit(f"Invalid term {term}")
+
+    if not helpers.courseExists(conn, subject, term):
+        exit(f"Invalid offering: {subject} {term}")
+
+    cur.callproc("enrolments", [subject, term])
+
+    students = cur.fetchall()
+
+    print(f"{subject} {term}")
+    if len(students) == 0:
+        exit("No students")
+
+    for student in students:
+        id, family, given = student
+        print(f"{id} {family}, {given}")
+
+except psycopg2.Error as err:
+    print("database error: ", err)
+finally:
+    if conn is not None:
+        conn.close()

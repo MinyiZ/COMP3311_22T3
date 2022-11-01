@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+import sys
+import psycopg2
+
+if len(sys.argv) < 3:
+    print("Usage: course-roll subject term")
+    exit(1)
+subject = sys.argv[1]
+term = sys.argv[2]
+
+conn = None
+try:
+    conn = psycopg2.connect(f"dbname=mymyunsw")
+    cur = conn.cursor()
+
+    # query = """
+    # 	select id, family, given from enrolments
+    # 	where subject = %s and term = %s
+    # 	order by family, given
+    # """
+    # query = "select * from enrolments(%s, %s)"
+    # cur.execute(query, [subject, term])
+    cur.callproc("enrolments", [subject, term])
+
+    students = cur.fetchall()
+
+    print(f"{subject} {term}")
+    if len(students) == 0:
+        exit("No students")
+
+    for student in students:
+        id, family, given = student
+        print(f"{id} {family}, {given}")
+
+except psycopg2.Error as err:
+    print("database error: ", err)
+finally:
+    if conn is not None:
+        conn.close()

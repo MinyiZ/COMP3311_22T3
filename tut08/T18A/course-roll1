@@ -1,0 +1,45 @@
+#!/usr/bin/python3
+import sys
+import psycopg2
+import helpers
+
+if len(sys.argv) < 2:
+    print("Usage: opendb DBname")
+    exit(1)
+subject = sys.argv[1]
+term = sys.argv[2]
+
+conn = None
+try:
+    conn = psycopg2.connect("dbname=mymyunsw")
+    cur = conn.cursor()
+
+    if not helpers.subjectExists(conn, subject):
+        sys.exit("Invalid subject")
+
+    if not helpers.termExists(conn, term):
+        sys.exit("Invalid term")
+
+    if not helpers.courseExists(conn, subject, term):
+        sys.exit("Invalid offering")
+
+    # query = "select * from enrolments(%s, %s)"
+    # cur.execute(query, [subject, term])
+    cur.callproc("enrolments", [subject, term])
+
+    students = cur.fetchall()
+
+    print(f"{subject} {term}")
+
+    if len(students) == 0:
+        sys.exit("No students")
+
+    for student in students:
+        id, family, given = student
+        print(f"{id} {family}, {given}")
+
+except psycopg2.Error as err:
+    print("database error: ", err)
+finally:
+    if conn is not None:
+        conn.close()

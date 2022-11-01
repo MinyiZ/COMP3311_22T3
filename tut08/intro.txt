@@ -1,0 +1,15 @@
+
+COMP3311 W8 Tutorial
+===========================================================
+
+Notices
+-------
+
+- Quiz due Friday 9pm
+
+Today
+------
+
+assignment 2
+python + psycopg2
+
