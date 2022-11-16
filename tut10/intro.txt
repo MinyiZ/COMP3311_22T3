@@ -1,0 +1,37 @@
+
+COMP3311 W10 Tutorial
+===========================================================
+
+Notices
+-------
+
+- exam 25th Nov
+- assignment marking finalised next week
+- sample exam + past exams available
+- fill out myExperience :D
+
+Exam Format
+------------
+
+- 9 questions
+    - 3 SQL
+    - 1 PLpgSQL
+    - 1 Python/psycopg2
+    - 4 analysis (theory)
+- prac worth 60%, analysis worth 40%
+
+- you use
+    - your own account on VLab and db2
+    - your own PostgreSQL server on db2
+
+- you have access to
+    - whole course web site
+    - PostgreSQL, Python, Psycopg2 documentation
+
+- effectively open-book and open-web
+
+Today
+------
+
+relational algebra
+transactions

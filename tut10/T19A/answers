@@ -1,0 +1,364 @@
+====
+Q2
+==== 
+
+S(A,B)
+
+| A   | B   |
+| --- | --- |
+| 1   | x   |
+| 2   | y   |
+| 3   | y   |
+
+T(A,C)
+
+| A   | C   |
+| --- | --- |
+| 1   | z   |
+
+U(A,B)
+
+| A   | B   |
+| --- | --- |
+| 2   | y   |
+
+theta join
+
+S join T on (S.A = T.A)
+
+| A   | B   | A   | C   |
+| --- | --- | --- | --- |
+| a   | x   | a   | z   |
+
+natural join
+
+S natural join T
+
+| A   | B   | C   |
+| --- | --- | --- |
+| a   | x   | z   |
+
+
+====
+Q3 
+====
+
+as a set
+
+| Speed |
+| ----- |
+| 1500  |
+| 1000  |
+| 700   |
+
+as a bag
+
+| Speed |
+| ----- |
+| 700   |
+| 1500  |
+| 1000  |
+| 1000  |
+| 700   |
+
+====
+Q4 
+====
+
+R(A,B,C)
+
+| A   | B   | C   |
+| --- | --- | --- |
+| a1  | b1  | c1  |
+| a1  | b2  | c2  |
+| a2  | b1  | c1  |
+
+S(B,C)
+	  
+| B   | C   |
+| --- | --- |
+| b1  | c1  |
+| b2  | c2  |
+
+T(A,B,C,D)
+
+| A   | B   | C   | D   |
+| --- | --- | --- | --- |
+| a1  | b1  | c1  | d1  |
+| a1  | b2  | c2  | d1  |
+| a2  | b1  | c1  | d2  |
+
+
+-----------
+a. R Div S
+-----------
+
+| A   |
+| --- |
+| a1  |
+
+-----------
+T Div S
+-----------
+
+| A   | D   |
+| --- | --- |
+| a1  | d1  |
+
+
+---------------------------
+b. R Div (Sel[B != b1](S))
+---------------------------
+
+Sel[B != b1](S)
+
+| B   | C   |
+| --- | --- |
+| b2  | c2  |
+
+
+R Div (Sel[B != b1](S))
+
+| A   |
+| --- |
+| a1  |
+
+
+---------------------------
+c. R Div (Sel[B != b2](S))
+---------------------------
+
+Sel[B != b2](S)
+
+| B   | C   |
+| --- | --- |
+| b1  | c1  |
+
+R Div (Sel[B != b2](S))
+
+| A   |
+| --- |
+| a1  |
+| a2  |
+
+------------------------------------------
+d. (R × S) - (Sel[R.C=S.C](R Join[B=B] S))
+------------------------------------------
+
+R × S
+
+| R.A | R.B | R.C | S.B | S.C |
+| --- | --- | --- | --- | --- |
+| a1  | b1  | c1  | b1  | c1  |
+| a1  | b1  | c1  | b2  | b2  |
+| a1  | b2  | c2  | b1  | c1  |
+| a1  | b2  | c2  | b2  | c2  |
+| a2  | b1  | c1  | b1  | c1  |
+| a2  | b1  | c1  | b2  | c2  |
+
+R Join[B=B] S
+
+| R.A | R.B | R.C | S.B | S.C |
+| --- | --- | --- | --- | --- |
+| a1  | b1  | c1  | b1  | c1  |
+| a2  | b1  | c1  | b1  | c1  |
+| a1  | b2  | c2  | b2  | c2  |
+
+Sel[R.C=S.C](R Join[B=B] S)
+
+| R.A | R.B | R.C | S.B | S.C |
+| --- | --- | --- | --- | --- |
+| a1  | b1  | c1  | b1  | c1  |
+| a2  | b1  | c1  | b1  | c1  |
+| a1  | b2  | c2  | b2  | c2  |
+
+(R × S) - (Sel[R.C=S.C](R Join[B=B] S))
+
+| R.A | R.B | R.C | S.B | S.C |
+| --- | --- | --- | --- | --- |
+| a1  | b1  | c1  | b2  | b2  |
+| a1  | b2  | c2  | b1  | c1  |
+| a2  | b1  | c1  | b2  | c2  |
+
+====
+Q7
+====
+
+Suppliers(sid, sname, address)
+Parts(pid, pname, colour)
+Catalog(supplier, part, cost)
+
+-----------------------------------------------------------------------------------------------------------------------------
+a. Find the names of suppliers who supply some red part.
+-----------------------------------------------------------------------------------------------------------------------------
+
+-- pids of red parts
+tmp1(part) = Proj[pid](Sel[colour='red'](Parts))
+-- supplier ids of red parts
+tmp2(sid) = Proj[supplier](Catalog join tmp1)
+-- supplier names that supply red parts
+tmp3 = Proj[sname](Suppliers tmp2)
+
+-----------------------------------------------------------------------------------------------------------------------------
+b. Find the sids of suppliers who supply some red or green part.
+-----------------------------------------------------------------------------------------------------------------------------
+
+-- pids of red or green parts
+tmp1(part) = Proj[pid](Sel[colour='red' or colour='green'](Parts))
+-- supplier ids of red or green parts
+tmp2(sid) = Proj[supplier](Catalog join tmp1)
+-- supplier names that supply red or green parts
+tmp3 = Proj[sname](Suppliers tmp2)
+
+-----------------------------------------------------------------------------------------------------------------------------
+d. Find the sids of suppliers who supply some red part and some green part.
+-----------------------------------------------------------------------------------------------------------------------------
+
+-- pids of red parts
+tmp1(part) = Proj[pid](Sel[colour='red'](Parts))
+-- supplier ids of red parts
+tmp2(sid) = Proj[supplier](Catalog join tmp1)
+
+
+-- pids of green parts
+tmp3(part) = Proj[pid](Sel[colour='green'](Parts))
+-- supplier ids of green parts
+tmp4(sid) = Proj[supplier](Catalog join tmp1)
+
+-- supplier ids of red and green parts
+tmp5 = tmp2 Intersect tmp4
+
+-----------------------------------------------------------------------------------------------------------------------------
+e. Find the sids of suppliers who supply every part.
+-----------------------------------------------------------------------------------------------------------------------------
+
+Catalog
+
+| S   | P   |
+| --- | --- |
+| 1   | x   |
+| 2   | x   |
+| 1   | y   |
+
+Parts
+
+| P   |
+| --- |
+| x   |
+| y   |
+
+-- all part ids
+tmp1(part) = Proj[pid](Parts)
+-- sids of suppliers of every part
+tmp2 = Catalog Div tmp1
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+i. Find the pids of parts that are supplied by at least two different suppliers.
+-----------------------------------------------------------------------------------------------------------------------------
+
+C1 = Catalog
+
+| supplier | part |
+| -------- | ---- |
+| 1        | x    |
+| 2        | x    |
+| 1        | y    |
+
+C2 = Catalog
+
+| supplier | part |
+| -------- | ---- |
+| 1        | x    |
+| 2        | x    |
+| 1        | y    |
+
+tmp1 = C1 join[C1.part = C2.part] C2
+
+| C1.supplier | C1.part | C2.part | C2.supplier |
+| ----------- | ------- | ------- | ----------- |
+| 1           | x       | x       | 1           |
+| 1           | x       | x       | 2           |
+| 2           | x       | x       | 1           |
+| 2           | x       | x       | 2           |
+| 1           | y       | y       | 1           |
+
+tmp2 = Sel[C1.supplier != C2.supplier](tmp1)
+
+| C1.supplier | C1.part | C2.part | C2.supplier |
+| ----------- | ------- | ------- | ----------- |
+| 1           | x       | x       | 2           |
+| 2           | x       | x       | 1           |
+
+tmp3(part) = Proj[C1.part](tmp2)
+
+| part |
+| ---- |
+| x    |
+
+
+=============
+Transactions
+=============
+
+Transfer Bob: readbalance(me)                     writebalance(me)                                      writebalance(Bob)
+Transfer Amy:                  readbalance(me)                     writebalance(me)   writebalance(Amy)
+
+====
+Q11
+====
+
+T2 -> T3
+T3 -> T1
+
+only possible schedule
+T2 -> T3 -> T1
+
+T1:                      R(A) W(Z)
+T2: R(B) W(Y) 
+T3:            W(A) W(B)
+
+
+====
+Q13
+====
+
+b.
+
+T1: W(X)      R(Y)
+T2:      R(X)      W(X)
+
+precedence graph
+T1 -> T2
+
+T1: W(X) R(Y)
+T2:           R(X) W(X)
+
+c.
+
+T1: R(X)              R(Y)
+T2:     R(Y)      R(X)
+T3:          W(X)
+
+precedence graph
+
+T1 -> T3
+T3 -> T2
+
+T1: R(X) R(Y)
+T2:                R(Y) R(X)
+T3:           W(X)
+
+d. 
+
+T1: R(X) R(Y) W(X)           W(X)
+T2:                R(Y)           R(Y)
+T3:                     W(Y)
+
+not view seralizable
+
+for a view serializable schedule, every read must read the same version of a shared object
+
+in this scenario, the first T2:R(Y) reads the inital value of Y and the second T2:R(Y) reads the version of Y written to by T3:W(Y)
+therefore any equivalence schedule requires T3:W(Y) to be between the two T2:R(Y)
+and there is obviously no serial schedule satisfying that condition
